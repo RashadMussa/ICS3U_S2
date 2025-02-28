@@ -1,6 +1,6 @@
 """
 Author : Rashad Mussa
-Student Number: 
+Student Number: 762918
 Due date : 28 Feburary 2025
 """
 
@@ -59,12 +59,12 @@ Part 3
 Program : Change calculator
 Description : Calculates the breakdown of coins (quarters, dimes, nickels, pennies) for a given amount of cents, excluding dollar amounts.
 VARIABLE DICTIONARY :
-cents	(int)	= Stores the amount of money in cents input by the user.
-quarters	(int)	= Stores the number of quarters calculated from the remaining cents.
-remaining	(int)	= Tracks the leftover cents after each coin calculation.
-dimes	(int)	= Stores the number of dimes calculated from the remaining cents.
-nickels	(int)	= Stores the number of nickels calculated from the remaining cents.
-pennies	(int)	= Stores the number of pennies calculated from the remaining cents.
+cents (int) = Stores the amount of money in cents input by the user.
+quarters (int) = Stores the number of quarters calculated from the remaining cents.
+remaining (int) = Tracks the leftover cents after each coin calculation.
+dimes (int) = Stores the number of dimes calculated from the remaining cents.
+nickels	(int) = Stores the number of nickels calculated from the remaining cents.
+pennies	(int) = Stores the number of pennies calculated from the remaining cents.
 """
 # Coin Change Calculator
 cents = int(input("Enter the amount of money in cents: "))  # Prompts user to input cents
