@@ -7,6 +7,7 @@ target_number: The randomly generated number the user is trying to guess (int).
 guess_count: The number of guesses the user has made (int).
 user_guess: The number guessed by the user (int).
 max_guesses: The maximum number of guesses allowed (int).
+guessed_correctly: A flag to track if the user has guessed the correct number (boolean).
 """
 import random
 
