@@ -1,7 +1,7 @@
 """
 Author : Rashad Mussa
 Student Number: 762918
-Due date : 17 March 2025
+Due date : 21 March 2025
 """
 
 """
@@ -10,7 +10,6 @@ Description : A game where the user tries to guess a randomly generated number b
 VARIABLE DICTIONARY :
 target_number (int) = Stores the randomly generated number between 1 and 100.
 guess_count (int) = Tracks the number of guesses the user has made.
-max_tries (int) = The maximum number of guesses allowed (6).
 user_guess (int) = Stores the number input by the user on each guess.
 """
 
