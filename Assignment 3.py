@@ -12,32 +12,33 @@
      matched_letters (int) = Number of matching character pairs in the word
      middle (int) = The halfway index of the current word
 """
-# Start of the program
+# Display intro message
 print("Palindrome program!")
 
-# Define a list of 10 words (some palindromes, some not)
-word_list = ["civic", "basketball", "radar", "goal", "kayak", "soccer", "racecar", "hotel", "refer", "loop"]
+# Define a list of 10 words to check
+word_list = ["civic", "basketball", "radar", "goal", "kayak", "soccer", "racecar", "hotel", "refer", "deed"]
 
-# Go through each word in the list
-for word in word_list:
-    letter_position = 0
-    matched_letters = 0
-    middle = len(word) // 2
+# Loop through each word in the list
+for current_word in word_list:
+    match_count = 0
+    index = 0
+    mid_point = len(current_word) // 2
 
-    # Check each letter from the beginning and end of the word
-    while letter_position < middle:
-        if word[letter_position] == word[len(word) - 1 - letter_position]:
-            matched_letters += 1
-            letter_position += 1
+    # Loop to compare characters from front and back
+    while index < mid_point:
+        front_char = current_word[index]
+        back_char = current_word[len(current_word) - 1 - index]
+
+        if front_char == back_char:
+            match_count += 1
+            index += 1
         else:
-            # Found a mismatch, so it's not a palindrome
-            print(word, "is not a palindrome")
-            # Exit the loop early without using break
-            letter_position = middle
+            # Not a palindrome; break early
+            index = mid_point
+            print(current_word, "is not a palindrome")
 
-        # If all matched letters reach halfway, it's a palindrome
-        if matched_letters == middle:
-            print(word, "is a palindrome")
+         if match_count == mid_point:
+            print(current_word, "is a palindrome")
 
 # End of program message
 print("Goodbye!")
