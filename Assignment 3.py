@@ -16,7 +16,7 @@
 print("Palindrome program!")
 
 # Define a list of 10 words to check
-word_list = ["civic", "basketball", "radar", "goal", "kayak", "soccer", "racecar", "hotel", "refer", "deed"]
+word_list = ["level", "noon", "goal", "radar", "bed", "soccer", "civic", "hotel", "cake", "madam"]
 
 # Loop through each word in the list
 for current_word in word_list:
@@ -33,7 +33,7 @@ for current_word in word_list:
             match_count += 1
             index += 1
         else:
-            # 
+            # Exit loop by forcing index to mid_point 
             index = mid_point
             print(current_word, "is not a palindrome")
 
