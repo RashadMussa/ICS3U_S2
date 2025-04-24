@@ -33,7 +33,7 @@ for current_word in word_list:
             match_count += 1
             index += 1
         else:
-            # Not a palindrome; break early
+            # 
             index = mid_point
             print(current_word, "is not a palindrome")
 
