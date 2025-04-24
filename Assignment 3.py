@@ -37,7 +37,7 @@ for current_word in word_list:
             index = mid_point
             print(current_word, "is not a palindrome")
 
-         if match_count == mid_point:
+        if match_count == mid_point:
             print(current_word, "is a palindrome")
 
 # End of program message
