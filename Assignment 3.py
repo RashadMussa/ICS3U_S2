@@ -12,33 +12,61 @@
      matched_letters (int) = Number of matching character pairs in the word
      middle (int) = The halfway index of the current word
 """
-# Display intro message
-print("Palindrome program!")
+# Display intro message  
+print("Palindrome program!")  
+# Print a welcome message to indicate the start of the program  
 
-# Define a list of 10 words to check
-word_list = ["level", "noon", "goal", "radar", "bed", "soccer", "civic", "hotel", "cake", "madam"]
+# Define a list of 10 words to check  
+word_list = ["level", "noon", "goal", "radar", "bed", "soccer", "civic", "hotel", "cake", "madam"]  
+# Create a list of 10 words to be tested for being palindromes  
 
-# Loop through each word in the list
-for current_word in word_list:
-    match_count = 0
-    index = 0
-    mid_point = len(current_word) // 2
+# Loop through each word in the list  
+for current_word in word_list:  
+# Iterate through each word in the word_list one by one  
 
-    # Loop to compare characters from front and back
-    while index < mid_point:
-        front_char = current_word[index]
-        back_char = current_word[len(current_word) - 1 - index]
+    match_count = 0  
+    # Initialize a counter to keep track of matching character pairs  
 
-        if front_char == back_char:
-            match_count += 1
-            index += 1
-        else:
-            # Exit loop by forcing index to mid_point 
-            index = mid_point
-            print(current_word, "is not a palindrome")
+    index = 0  
+    # Set the starting index for comparison to 0  
 
-        if match_count == mid_point:
-            print(current_word, "is a palindrome")
+    mid_point = len(current_word) // 2  
+    # Calculate the midpoint of the word (only need to compare up to this point)  
 
-# End of program message
-print("Goodbye!")
+    # Loop to compare characters from front and back  
+    while index < mid_point:  
+    # Continue looping until all necessary characters have been compared  
+
+        front_char = current_word[index]  
+        # Get the character from the front of the word at the current index  
+
+        back_char = current_word[len(current_word) - 1 - index]  
+        # Get the character from the end of the word at the mirrored index  
+
+        if front_char == back_char:  
+        # Check if the characters from the front and back match  
+
+            match_count += 1  
+            # Increment match_count if the characters are equal  
+
+            index += 1  
+            # Move to the next character for comparison  
+
+        else:  
+        # If the characters do not match  
+
+            # Exit loop by forcing index to mid_point   
+            index = mid_point  
+            # Set index to mid_point to break out of the loop  
+
+            print(current_word, "is not a palindrome")  
+            # Print that the word is not a palindrome  
+
+        if match_count == mid_point:  
+        # After all comparisons, if the number of matches equals mid_point  
+
+            print(current_word, "is a palindrome")  
+            # Print that the word is a palindrome  
+            
+             # End of program message
+            print("Goodbye!")
