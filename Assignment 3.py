@@ -68,5 +68,5 @@ for current_word in word_list:
             print(current_word, "is a palindrome")  
             # Print that the word is a palindrome  
             
-             # End of program message
+            # End of program message
             print("Goodbye!")
