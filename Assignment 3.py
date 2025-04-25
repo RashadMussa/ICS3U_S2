@@ -5,12 +5,15 @@
    Course Code : ICS3U
    Program : Is it a Palindrome?
    Description : A program that checks each word in a list to determine if it is a palindrome.
-   VARIABLE DICTIONARY :
-     word_list (list) = A list containing 10 words, some of which are palindromes
-     word (string) = The current word being checked from the list
-     letter_position (int) = Index used to compare characters from the start and end of the word
-     matched_letters (int) = Number of matching character pairs in the word
-     middle (int) = The halfway index of the current word
+
+VARIABLE DICTIONARY :
+  word_list (list) = A list containing 10 words to check for palindromes
+  current_word (string) = The current word being checked from the list
+  match_count (int) = Number of matching character pairs from front and back
+  index (int) = Index used to compare characters from the start and end of the word
+  mid_point (int) = The halfway point in the word, up to which comparisons are made
+  front_char (char) = Character from the front of the word at the current index
+  back_char (char) = Character from the end of the word at the mirrored index
 """
 # Display intro message  
 print("Palindrome program!")  
