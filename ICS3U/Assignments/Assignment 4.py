@@ -101,6 +101,3 @@ if file_loaded:  # Proceed only if file loaded correctly
                 print("The word on", input_date, "was", result)  # Show result
             else:
                 print("No word found for", input_date)  # Date not found
-
-else:
-    print("Program ended because the Wordle data file could not be loaded.")  # File load failure message
