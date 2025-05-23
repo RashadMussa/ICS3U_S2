@@ -28,83 +28,79 @@ d (str): user-input day
 y (str): user-input year
 """
 
-# Lists to hold data from the file
-data_lines = []        # Each line as [month, day, year, word]
-dates = []             # Converted dates in YYYYMMDD format
-answers = []           # Wordle answer words
+data_lines = []  # List to hold data lines from the file
+dates = []       # List to store numeric dates
+answers = []     # List to store corresponding Wordle words
 
-# List of months used to convert text month to number
-months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",  # Month abbreviations
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-# Try to open the file and read the data
+file_loaded = True  # Flag to check if file loads successfully
+
 try:
-    file = open("/workspaces/ICS3U_S2/Data/wordle.dat", "r")  # Open file in read mode
-    line = file.readline().strip()                            # Read first line and strip whitespace
-    while line != "":                                         # Loop until end of file
-        data_lines.append(line.split())                      # Split line and add to data list
-        line = file.readline().strip()                       # Read next line
-    file.close()                                              # Close the file
-except OSError as e:                                          # If file error happens
-    print("File error:", e)                                   # Print error message
-    exit()                                                    # Exit program
+    file = open("/workspaces/ICS3U_S2/Data/wordle.dat", "r")  # Open the data file
+    line = file.readline().strip()  # Read and strip first line
+    while line != "":  # Loop until end of file
+        data_lines.append(line.split())  # Add line as list of parts
+        line = file.readline().strip()  # Read next line
+    file.close()  # Close the file
+except OSError as e:  # If file reading fails
+    print("File error:", e)  # Show the error
+    file_loaded = False  # Mark the file as not loaded
 
-# Function to convert a month/day/year to a single number like YYYYMMDD
-def to_number(mon, dy, yr):
-    num = int(yr) * 10000                                     # Convert year to YYYY0000
-    num += (months.index(mon) + 1) * 100                      # Convert month to MM00
-    num += int(dy)                                            # Add day
-    return num                                                # Return full date number
+if file_loaded:  # Proceed only if file loaded correctly
 
-# Fill the dates and answers lists from the file data
-for entry in data_lines:                                      # Loop through each entry in the file
-    dates.append(to_number(entry[0], entry[1], entry[2]))     # Convert and store the date
-    answers.append(entry[3])                                  # Store the word
+    def to_number(mon, dy, yr):  # Convert month/day/year to numeric date
+        num = int(yr) * 10000  # Start with year (YYYY0000)
+        num += (months.index(mon) + 1) * 100  # Add month (MM00)
+        num += int(dy)  # Add day
+        return num  # Return full date
 
-# Search function to find the date a word was used
-def search_word(word):
-    word = word.upper()                                       # Make input uppercase
-    if word in answers:                                       # If word exists in answer list
-        index = answers.index(word)                           # Get its position
-        return dates[index]                                   # Return date at that position
-    return 0                                                  # Return 0 if not found
+    for entry in data_lines:  # Loop through file entries
+        dates.append(to_number(entry[0], entry[1], entry[2]))  # Convert and store date
+        answers.append(entry[3])  # Store word
 
-# Search function to find the word used on a given date
-def search_date(mon, dy, yr):
-    target = to_number(mon, dy, yr)                           # Convert input to date number
-    if target in dates:                                       # If the date is in the list
-        return answers[dates.index(target)]                   # Return corresponding word
-    return None                                               # Return None if not found
+    def search_word(word):  # Look up date by word
+        word = word.upper()  # Convert to uppercase
+        if word in answers:  # If word exists in list
+            index = answers.index(word)  # Get its index
+            return dates[index]  # Return corresponding date
+        return 0  # Return 0 if not found
 
-# Start of program interaction
-print("Welcome to the Wordle Finder!")                        # Greet the user
+    def search_date(mon, dy, yr):  # Look up word by date
+        target = to_number(mon, dy, yr)  # Convert input to date number
+        if target in dates:  # If date exists
+            return answers[dates.index(target)]  # Return corresponding word
+        return None  # Return None if date not found
 
-# Ask user to choose search type
-option = input("Enter 'w' to search by word or 'd' to search by date: ").lower()  # Get and lowercase choice
+    print("Welcome to the Wordle Finder!")  # Greeting
 
-# If searching by word
-if option == "w":
-    user_word = input("Enter a word to look up: ")            # Ask for the word
-    found = search_word(user_word)                            # Search for its date
-    if found > 0:                                             # If a match is found
-        print("The word", user_word.upper(), "was used on", found)  # Show result
-    else:
-        print(user_word.upper(), "was not found.")            # Show not found message
+    option = input("Enter 'w' to search by word or 'd' to search by date: ").lower()  # Get search choice
 
-# If searching by date
-elif option == "d":
-    y = input("Enter the year: ")                             # Ask for year
-    m = input("Enter the month (e.g. Jan): ").capitalize()    # Ask for month and format it
-    d = input("Enter the day: ")                              # Ask for day
-    input_date = to_number(m, d, y)                           # Convert date to number
-
-    if input_date < 20210619:                                 # Check if date is too early
-        print(input_date, "is before the first Wordle. Try something later.")
-    elif input_date > 20240421:                               # Check if date is too recent
-        print(input_date, "is too recent. Our data only goes up to 20240421.")
-    else:
-        result = search_date(m, d, y)                         # Look up word for date
-        if result != None:                                    # If word is found
-            print("The word on", input_date, "was", result)   # Show result
+    if option == "w":  # If user chose word search
+        user_word = input("Enter a word to look up: ")  # Ask for the word
+        found = search_word(user_word)  # Search for date
+        if found > 0:  # If found
+            print("The word", user_word.upper(), "was used on", found)  # Display result
         else:
-            print("No word found for", input_date)            # Show not found message
+            print(user_word.upper(), "was not found.")  # Word not found
+
+    elif option == "d":  # If user chose date search
+        y = input("Enter the year: ")  # Ask for year
+        m = input("Enter the month (e.g. Jan): ").capitalize()  # Ask for month
+        d = input("Enter the day: ")  # Ask for day
+        input_date = to_number(m, d, y)  # Convert input to numeric date
+
+        if input_date < 20210619:  # If too early
+            print(input_date, "is before the first Wordle. Try something later.")
+        elif input_date > 20240421:  # If too recent
+            print(input_date, "is too recent. Our data only goes up to 20240421.")
+        else:
+            result = search_date(m, d, y)  # Search for word
+            if result != None:  # If found
+                print("The word on", input_date, "was", result)  # Show result
+            else:
+                print("No word found for", input_date)  # Date not found
+
+else:
+    print("Program ended because the Wordle data file could not be loaded.")  # File load failure message
