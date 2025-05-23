@@ -38,7 +38,7 @@ months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",  # Month abbreviations
 file_loaded = True  # Flag to check if file loads successfully
 
 try:
-    file = open("/workspaces/ICS3U_S2/Data/wordle.dat", "r")  # Open the data file
+    file = open("/workspaces/ICS3U_S2/ICS3U/Data/wordle.dat", "r")  # Open the data file
     line = file.readline().strip()  # Read and strip first line
     while line != "":  # Loop until end of file
         data_lines.append(line.split())  # Add line as list of parts
