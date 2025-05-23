@@ -5,6 +5,27 @@ Last Updated: May 19, 2025
 Program: Wordle Finder
 Description: This program lets the user search a Wordle solution file
 either by entering a word or by entering a specific date.
+
+VARIABLE DICTIONARY:
+data_lines (list): stores each line from the file as [month, day, year, word]
+dates (list): holds numeric dates converted to YYYYMMDD format
+answers (list): contains Wordle solution words from the file
+months (list): 3-letter month abbreviations used for conversion to numbers
+file (file): file object used to read the data
+line (str): temporarily holds each line read from the file
+entry (list): a single line from the file split into components
+mon (str): month part of the date (e.g. "Jan")
+dy (str): day part of the date (e.g. "07")
+yr (str): year part of the date (e.g. "2023")
+user_word (str): the word entered by the user in word search
+found (int): numeric date result from search_word()
+target (int): numeric date built from user input in search_date()
+result (str/None): word found for a given date or None if not found
+input_date (int): date from user input in YYYYMMDD format
+option (str): user's input choice for search type ('w' or 'd')
+m (str): user-input month abbreviation
+d (str): user-input day
+y (str): user-input year
 """
 
 # Lists to hold data from the file
