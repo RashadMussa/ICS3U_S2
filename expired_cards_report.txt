@@ -1,0 +1,65 @@
+Name                 Card Type    Number               Expiry Status
+----------------------------------------------------------------------
+Owen Balmer:         MasterCard   #5521276131653326    202302 EXPIRED
+Katie Sykes:         Visa         #4929512638146385    202303 EXPIRED
+Katotoka Katotoka:   Visa         #4916942053982391    202304 EXPIRED
+Reece Webb:          MasterCard   #5502658551762047    202309 EXPIRED
+Alicia Haydon:       MasterCard   #5268204544000148    202401 EXPIRED
+Makayla Taplin:      Visa         #4539131225370506    202402 EXPIRED
+Archer Medley:       MasterCard   #5405417576092585    202402 EXPIRED
+Caitlin Guilfoyle:   MasterCard   #5313876559942168    202403 EXPIRED
+Jeroen Botermans:    Visa         #4532362644068937    202403 EXPIRED
+Sulimat Sultanovich: MasterCard   #5390806395732412    202403 EXPIRED
+Melanie Payne:       Visa         #4485648398300022    202404 EXPIRED
+Djonno den Elzen:    MasterCard   #5415746462166436    202404 EXPIRED
+Khadimat Bisliev:    MasterCard   #5184333879740530    202404 EXPIRED
+Milka Koedijk:       MasterCard   #5538998030512961    202405 EXPIRED
+Nancy Look:          Visa         #4485341348874870    202405 EXPIRED
+Chifushimotoku Chifushimotoku: MasterCard   #5436414672078603    202406 EXPIRED
+Maura Twofoot:       MasterCard   #5434566595705018    202406 EXPIRED
+William Funderburk:  MasterCard   #5193403016507032    202407 EXPIRED
+Kristopher Scott:    MasterCard   #5321438980144276    202407 EXPIRED
+Diny Keijzers:       Visa         #4716370105148054    202408 EXPIRED
+Donald Munoz:        Visa         #4916746857404852    202408 EXPIRED
+Mansur Savenije:     MasterCard   #5189722360621933    202408 EXPIRED
+Samantha Priestley:  MasterCard   #5480711505058065    202408 EXPIRED
+Brunella D'Avis:     Visa         #4716930450057117    202408 EXPIRED
+Arikazushikitoka Arikazushikitoka: Visa         #4916475491793104    202409 EXPIRED
+Scott Hogan:         MasterCard   #5340097826285102    202410 EXPIRED
+Delmar Belisle:      Visa         #4539812122792583    202410 EXPIRED
+Neriman Dekker:      MasterCard   #5283959304961240    202412 EXPIRED
+Orlando Diggle:      MasterCard   #5512917081675311    202412 EXPIRED
+Abdulbek Sultanovich: Visa         #4485491933345883    202501 EXPIRED
+Jitakuto Jitakuto:   MasterCard   #5133711516044105    202501 EXPIRED
+Clothilde De La Ronde: Visa         #4532393765350804    202501 EXPIRED
+Alex Cooper:         Visa         #4532738582386185    202501 EXPIRED
+Zushidomiku Zushidomiku: Visa         #4532915497711331    202502 EXPIRED
+Sofia Fisher:        Visa         #4539999015903821    202502 EXPIRED
+Ferragus Veronneau:  Visa         #4556595395327751    202502 EXPIRED
+Patricia Durham:     MasterCard   #5313597503591071    202502 EXPIRED
+Edward Prendiville:  Visa         #4556376836098776    202503 EXPIRED
+Sienna Letters:      Visa         #4716374338709716    202503 EXPIRED
+Christopher Sinclair: MasterCard   #5116694466870094    202503 EXPIRED
+Dean Jones:          MasterCard   #5554870153434159    202503 EXPIRED
+Corinne Auclair:     Visa         #4485227786254354    202503 EXPIRED
+Jo-Anne van Zelst:   MasterCard   #5498450530008684    202503 EXPIRED
+Kudojikutoku Kudojikutoku: Visa         #4916481639699815    202503 EXPIRED
+Ferrau Lagueux:      Visa         #4485278764489553    202503 EXPIRED
+Anthony Jarvis:      MasterCard   #5379280764865077    202504 EXPIRED
+Frank Pierson:       MasterCard   #5452589408768665    202504 EXPIRED
+Tim Underhill:       MasterCard   #5259585708672784    202504 EXPIRED
+Robert Walls:        Visa         #4916917946648128    202504 EXPIRED
+Siem Haverkate:      Visa         #4716702952061230    202505 EXPIRED
+Rafiq Jagesar:       Visa         #4532852059545882    202505 EXPIRED
+Tapa Korgay:         Visa         #4916343197904419    202505 EXPIRED
+Imme Neve:           MasterCard   #5365694030538365    202506 RENEW IMMEDIATELY
+Christopher Peacock: Visa         #4916607758480922    202506 RENEW IMMEDIATELY
+Kate Jamison:        MasterCard   #5385356141054783    202506 RENEW IMMEDIATELY
+Austin Staley:       Visa         #4929768023073846    202506 RENEW IMMEDIATELY
+Martine Cormier:     Visa         #4532402986575303    202506 RENEW IMMEDIATELY
+Charmaine Therrien:  MasterCard   #5101004283543642    202506 RENEW IMMEDIATELY
+Didiane Lalonde:     Visa         #4532771878018832    202506 RENEW IMMEDIATELY
+Betty Thomas:        Visa         #4929288103115771    202506 RENEW IMMEDIATELY
+Comforte Fresne:     Visa         #4929419469874145    202506 RENEW IMMEDIATELY
+
+Total expired/renew immediately cards: 61
