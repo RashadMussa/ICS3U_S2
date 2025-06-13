@@ -7,50 +7,25 @@ Program : Expired Credit Cards Report
 Description : Reads credit card data from a file, checks card validity with Luhn algorithm,
               identifies expired or soon-to-expire cards, sorts them by expiry date,
               and outputs a detailed report with color-coded console messages.
-
-VARIABLE DICTIONARY:
-cc_number (str) = credit card number string passed into luhn_check()
-total (int) = sum of digits used in Luhn checksum calculation
-reverse_digits (str) = reversed string of cc_number for Luhn processing
-i (int) = loop index for iterating over digits in reversed credit card number
-n (int) = integer digit currently processed in Luhn algorithm
-records (list) = list of card records being sorted in merge_sort()
-mid (int) = midpoint index to split records into left and right halves
-left (list) = left half of records list in merge_sort()
-right (list) = right half of records list in merge_sort()
-i, j, k (int) = indices for iterating left, right, and main records lists in merge_sort()
-input_file (str) = file path for input data of credit cards
-output_file (str) = file name to write expired cards report
-threshold (int) = integer YYYYMM format representing the cutoff date for expiry checking
-expired (list) = list of records containing expired or soon-to-expire cards
-RED, YELLOW, RESET (str) = ANSI color escape codes for console output
-file (file object) = input file handle for reading card data
-lines (list) = list of all lines read from the input file
-line (str) = current line read from file during processing
-parts (list) = list of fields parsed from a line by splitting on commas
-fname (str) = first name extracted from line data
-lname (str) = last name extracted from line data
-cctype (str) = credit card type extracted from line data
-ccnum (str) = credit card number extracted from line data
-month (int) = expiry month extracted and converted to integer
-year (int) = expiry year extracted and converted to integer
-dateval (int) = combined integer YYYYMM format of expiry date used for comparison and sorting
-status (str) = "EXPIRED" or "RENEW IMMEDIATELY" depending on expiry date
-name (str) = formatted full name padded for alignment
-expiry (str) = formatted expiry date string in YYYYMM format
-item (list) = single record from expired list used during output
-color (str) = chosen ANSI color code string depending on status
 """
 
-# ANSI color codes as constants at top for clarity
-RED = "\033[91m"
-YELLOW = "\033[93m"
-RESET = "\033[0m"
+# ANSI color codes 
+RED = "\033[91m"      # Red text for expired cards
+YELLOW = "\033[93m"   # Yellow text for soon-to-expire cards
+RESET = "\033[0m"     # Reset text color to default
+
 
 def luhn_check(cc_number):
     """
     Validates a credit card number string using the Luhn algorithm.
     Returns True if valid, False otherwise.
+    
+    Variable Dictionary:
+    cc_number (str) = credit card number string passed into luhn_check()
+    total (int) = sum of digits used in Luhn checksum calculation
+    reverse_digits (str) = reversed string of cc_number for Luhn processing
+    i (int) = loop index for iterating over digits in reversed credit card number
+    n (int) = integer digit currently processed in Luhn algorithm
     """
     total = 0  # Initialize sum for checksum
     reverse_digits = cc_number[::-1]  # Reverse number for processing from right to left
@@ -70,6 +45,13 @@ def merge_sort(records):
     """
     Sorts the list of card records in place by expiry date (YYYYMM format) using merge sort.
     Each record is a list with the expiry date as the last element.
+    
+    Variable Dictionary:
+    records (list) = list of card records being sorted in merge_sort()
+    mid (int) = midpoint index to split records into left and right halves
+    left (list) = left half of records list in merge_sort()
+    right (list) = right half of records list in merge_sort()
+    i, j, k (int) = indices for iterating left, right, and main records lists in merge_sort()
     """
     if len(records) > 1:  # Only sort if more than one element
         mid = len(records) // 2  # Find middle
@@ -109,16 +91,28 @@ def parse_line(line):
     Parses a single line of input data into its components,
     validates, and returns a record if valid.
     Returns None if line is invalid or improperly formatted.
+    
+    Variable Dictionary:
+    line (str) = current line read from file during processing
+    parts (list) = list of fields parsed from a line by splitting on commas
+    fname (str) = first name extracted from line data
+    lname (str) = last name extracted from line data
+    cctype (str) = credit card type extracted from line data
+    ccnum_str (str) = credit card number extracted from line data
+    month_str (str) = raw month from file
+    year_str (str) = raw year from file
+    month (int) = expiry month extracted and converted to integer
+    year (int) = expiry year extracted and converted to integer
+    dateval (int) = combined integer YYYYMM format of expiry date used for comparison and sorting
     """
     parts = line.strip().split(",")  # Split CSV fields
 
-    if len(parts) != 6:
-        return None  # Invalid number of fields
+    if len(parts) != 6:  # Must have 6 parts (fname, lname, type, number, month, year)
+        return None
 
     fname, lname, cctype, ccnum_str, month_str, year_str = parts
 
-    # Validate credit card number digits only
-    if not ccnum_str.isdigit():
+    if not ccnum_str.isdigit():  # Ensure card number contains only digits
         return None
 
     try:
@@ -127,8 +121,7 @@ def parse_line(line):
     except ValueError:
         return None  # Month/year not integers
 
-    # Validate month is in valid range
-    if not (1 <= month <= 12):
+    if not (1 <= month <= 12):  # Month must be valid
         return None
 
     dateval = year * 100 + month  # Combine year and month for easy comparison
@@ -136,80 +129,99 @@ def parse_line(line):
     return [fname, lname, cctype, ccnum_str, month, year, dateval]
 
 
-def output_report(expired_cards, output_file):
+def output_report(expired_cards):
     """
-    Prints the expired cards report to the console with colors and writes to a file.
+    Prints the expired cards report to the console with colors.
     Includes header and summary lines.
+    
+    Variable Dictionary:
+    expired_cards (list) = list of records containing expired or soon-to-expire cards
+    header (str) = report column titles
+    separator (str) = line to separate header and entries
+    item (list) = single record from expired list used during output
+    color (str) = chosen ANSI color code string depending on status
+    line (str) = formatted output line
+    summary (str) = summary line showing count
     """
     if not expired_cards:  # No expired cards found
         print(RED + "No expired or soon-to-expire credit cards found." + RESET)
-        with open(output_file, "w") as out:
-            out.write("No expired or soon-to-expire credit cards found.\n")
         return
 
+    # Print report header
     header = "{:<20} {:<12} {:<20} {:<6} {}".format("Name", "Card Type", "Number", "Expiry", "Status")
     separator = "-" * 70
 
     print(header)
     print(separator)
 
-    with open(output_file, "w") as out:
-        out.write(header + "\n")
-        out.write(separator + "\n")
+    # Print each expired/soon-to-expire card
+    for item in expired_cards:
+        color = RED if item[4] == "EXPIRED" else YELLOW
+        line = "{:<20} {:<12} {:<20} {:<6} {}".format(item[0], item[1], item[2], item[3], item[4])
+        print(color + line + RESET)
 
-        for item in expired_cards:
-            color = RED if item[4] == "EXPIRED" else YELLOW  # Color based on status
-            line = "{:<20} {:<12} {:<20} {:<6} {}".format(item[0], item[1], item[2], item[3], item[4])
-            print(color + line + RESET)  # Print colored line to console
-            out.write(line + "\n")  # Write line to output file
-
-        summary = "\nTotal expired/renew immediately cards: {}".format(len(expired_cards))
-        print(summary)
-        out.write(summary + "\n")
+    # Print summary
+    summary = "\nTotal expired/renew immediately cards: {}".format(len(expired_cards))
+    print(summary)
 
 
 def main():
+    """
+    Main function to process credit card data, identify expired or soon-to-expire cards,
+    sort them by expiry date, and output a report.
+    
+    Variable Dictionary:
+    input_file (str) = file path for input data of credit cards
+    threshold (int) = integer YYYYMM format representing the cutoff date for expiry checking
+    expired (list) = list of records containing expired or soon-to-expire cards
+    file (file object) = input file handle for reading card data
+    lines (list) = list of all lines read from the input file
+    record (list) = parsed credit card record
+    fname (str) = first name
+    lname (str) = last name
+    cctype (str) = credit card type
+    ccnum (str) = credit card number
+    month (int) = expiry month
+    year (int) = expiry year
+    dateval (int) = expiry date in YYYYMM format
+    status (str) = "EXPIRED" or "RENEW IMMEDIATELY" depending on expiry date
+    name (str) = formatted full name padded for alignment
+    expiry (str) = formatted expiry date string in YYYYMM format
+    """
     input_file = "/workspaces/ICS3U_S2/ICS3U/Data/CARDNUMBERS.dat"  # Input file path
-    output_file = "expired_cards_report.txt"  # Output file name
     threshold = 202506  # Threshold date in YYYYMM (June 2025)
-
     expired = []  # List to hold expired or soon-to-expire cards
 
     try:
         with open(input_file, "r") as file:  # Open input file safely
-            lines = file.readlines()  # Read all lines
+            lines = file.readlines()  # Read all lines into a list
 
-        for line in lines[1:]:  # Skip header line and process remaining lines
-            record = parse_line(line)  # Parse and validate line
+        for line in lines[1:]:  # Skip header line and process each data line
+            record = parse_line(line)  # Extract fields and validate
 
             if record is None:  # Skip invalid lines
                 continue
 
             fname, lname, cctype, ccnum, month, year, dateval = record
 
-            # Only consider cards expired or expiring at or before threshold AND that pass Luhn check
+            # Check expiry and validate number
             if dateval <= threshold and luhn_check(ccnum):
-                # Determine status string
                 status = "EXPIRED" if dateval < threshold else "RENEW IMMEDIATELY"
-
-                name = (fname + " " + lname + ":").ljust(20)  # Format name for alignment
-                cctype = cctype.ljust(12)  # Format card type
-                ccnum = "#" + ccnum  # Prefix card number for output
-                expiry = str(year) + str(month).zfill(2)  # Format expiry as YYYYMM string
-
-                # Append all necessary fields plus dateval for sorting
+                name = (fname + " " + lname + ":").ljust(20)
+                cctype = cctype.ljust(12)
+                ccnum = "#" + ccnum
+                expiry = str(year) + str(month).zfill(2)
                 expired.append([name, cctype, ccnum, expiry, status, dateval])
 
-        merge_sort(expired)  # Sort expired cards by expiry date ascending
-
-        output_report(expired, output_file)  # Output the results
+        merge_sort(expired)  # Sort expired cards by date
+        output_report(expired)  # Print report to console
 
     except FileNotFoundError:  # Handle missing input file
         print(RED + "Error: CARDNUMBERS.dat not found at the given path." + RESET)
 
-    except Exception as e:  # Catch any other unexpected errors gracefully
+    except Exception as e:  # Catch unexpected errors
         print(RED + "An unexpected error occurred: " + str(e) + RESET)
 
 
 if __name__ == "__main__":
-    main()
+    main()  # Start program
